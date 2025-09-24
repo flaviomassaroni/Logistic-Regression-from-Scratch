@@ -26,11 +26,22 @@ class LogisticRegression:
         self.W = np.zeros(self.X.shape[1])
         self.b = 0.0
 
+    def sigmoid(self, Z):
+        return 1 / (1 + np.exp(-Z))
+
     def forward(self, X):
-        pass
+        Z = np.dot(X, self.W) + self.b
+        A = self.sigmoid(Z)
+        return A
 
     def compute_cost(self, predictions):
-        pass
+        
+        m = self.X.shape[0]
+
+        # Computing Binary cross entropy cost function
+        cost = np.sum((-np.log(predictions + 1e-8)*self.y) + (-np.log(1 - predictions + 1e-8))* (1 - self.y))
+        cost = cost / m
+        return cost
 
     def compute_gradients(self, predictions):
         pass
